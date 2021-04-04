@@ -20,10 +20,15 @@ $(function () {
 		}
 	})
 
+
+	// Submiting Copy Button
+	new ClipboardJS('.btn');
+
 	// Submiting Rest Button
 
 	$('#rest').on('click', () => {
 		$('.btn-info').addClass('visually-hidden')
+		$('#copy').addClass('visually-hidden')
 		$('.input-group').removeClass('visually-hidden')
 		$('#result a').remove()
 	})
@@ -41,10 +46,12 @@ function getShortlyLink(data) {
 
 		$('.spinner').addClass('visually-hidden')
 		$('.btn-info').removeClass('visually-hidden')
+		$('#copy').removeClass('visually-hidden')
 
-		result += `<a href="${data.result.full_short_link}">
-			${data.result.full_short_link}
-		</a>`
+		result += `
+					<input id="copy" type="text" class="form-control" value="${data.result.full_short_link}"
+					aria-label="Username" aria-describedby="addon-wrapping">
+					`
 		//append the chiled to Result
 		$('#result').append(result)
 	}).catch(err => console.log(err))
